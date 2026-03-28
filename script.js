@@ -1,6 +1,6 @@
 // VALUES
 let postTitle = document.getElementById("post-title");
-let postText = document.getElementById("post-text");
+let postText = document.getElementById("textbox");
 let addPostBtn = document.getElementById("addButton");
 let blogCards = document.getElementById('cards-container');
 
