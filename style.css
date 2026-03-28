@@ -83,3 +83,11 @@ h3 {
   height: 15%;
   object-fit: cover;
 }
+
+#delete, #edit {
+    width: 25%;
+    margin: 2px;
+    padding: 2px;
+    font-size: 12px;
+    border: 1px solid #212529;
+}
