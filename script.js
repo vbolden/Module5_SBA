@@ -30,14 +30,14 @@ function addItem() {
     editPost.id = "edit"
     editPost.innerHTML = "Edit Post"
 
-    let removePost = document.createElement('button');
-    removePost.id = "remove"
-    removePost.innerHTML = "Remove Post"
+    let deletePost = document.createElement('button');
+    deletePost.id = "delete"
+    deletePost.innerHTML = "Delete Post"
 
     postCard.appendChild(postCardTitle);
     postCard.appendChild(postCardBody);
     postCard.appendChild(editPost);
-    postCard.appendChild(removePost);
+    postCard.appendChild(deletePost);
     blogCards.appendChild(postCard);
 }
 
