@@ -15,7 +15,7 @@ body{
 }
 
 .form {
-  width: 60vw;
+  width: 55vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -69,14 +69,14 @@ button:hover {
 }
 
 .aside {
-  width: 40vw;
+  width: 45vw;
   height: 100vh;
   overflow: hidden;
 }
 
 .aside img {
   width: 100%;
-  height: 100%;
+  height: 15%;
   object-fit: cover;
 }
 
