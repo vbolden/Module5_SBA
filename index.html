@@ -21,11 +21,13 @@
             <div class="form-group">
                 <label for="title">Post Title: </label>
                 <input type="text" id="post-title" name="title" minlength="3" required />
+                <span id="title-error"></span>
             </div>
 
             <div class="form-group">
                 <label for="post">What's on your mind? </label>
                 <textarea name="post" id="textbox" rows="15" required></textarea>
+                <span id="text-error"></span>
             </div>
 
             <button type="submit" id="addButton">Add Post</button>
