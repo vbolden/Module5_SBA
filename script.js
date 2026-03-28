@@ -6,5 +6,6 @@ let addPostBtn = document.getElementById("addButton");
 
 // EVENT LISTENERS
 addPostBtn.addEventListener('click', (e) => {
-    console.log("Hello there")
-})
+    e.preventDefault();
+    console.log("Hello there");
+});
