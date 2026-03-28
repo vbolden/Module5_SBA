@@ -1,4 +1,5 @@
 // VALUES
+let form = document.getElementById('form');
 let postTitle = document.getElementById("post-title");
 let postText = document.getElementById("textbox");
 let addPostBtn = document.getElementById("addButton");
@@ -6,14 +7,23 @@ let blogCards = document.getElementById('cards-container');
 
 
 // EVENT LISTENERS
-addPostBtn.addEventListener('click', (e) => {
+form.addEventListener('submit', (e) => {
     e.preventDefault();
-    console.log("Hello there");
-
     addItem();
     clearInput();
 });
 
+
+addPostBtn.addEventListener('click', () => {
+    postTitle.addEventListener('input', (e) => {
+        if (postTitle.validity.valueMissing) {
+            postTitle.setCustomValidity("Please enter a title");
+            postTitle.reportValidity();
+        } else {
+            postTitle.setCustomValidity('')
+        }
+    })
+})
 
 // FUCNTIONS
 function addItem() {
@@ -43,5 +53,5 @@ function addItem() {
 
 function clearInput() {
     postTitle.value = '';
-    postText.value =  '';
+    postText.value = '';
 }
