@@ -6,18 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
-    <title>Form Vavildation</title>
+    <title>Interactice Blog</title>
 </head>
 
 <body>
     <div class="container">
 
         <form class="form">
-            <h1>Here’s a Form</h1>
+            <div id="headings">
+                <h1>Pages Without Borders</h1>
+                <small>Share your thoughts!</small>
+            </div>
 
             <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required />
+                <label for="post">Post Title: </label>
+                <input type="text" id="post-title" name="post" required />
+            </div>
+
+            <div class="form-group">
+                <label for="post">What's on your mind? </label>
+                <textarea name="post" id="post" rows="15" required></textarea>
             </div>
             
         </form>
