@@ -122,24 +122,52 @@ cancelDelBtn.onclick = () => {
 };
 
 function editEntry(e) {
+
     if (e.target.classList.contains('edit')) {
-        editModal.classList.remove('display-none');
-        let card = e.target.parentElement;
-        let title = card.querySelector('h4')
-        console.log(title.innerHTML);
+        currentCard = e.target.closest('.card-body');
+
+        let title = currentCard.querySelector('h4')
+        let text = currentCard.querySelector('p');
+
         titleEdit.value = title.innerHTML;
-        let text = card.querySelector('p')
-        console.log(text.innerHTML);
         textEdit.value = text.innerHTML;
-        confirmEdtBtn.onclick = () => {
-            console.log(title.innerHTML);
-            title.innerHTML = titleEdit.value;
-            console.log(title.innerHTML);
-            text.innerHTML = textEdit.value;
-            editModal.classList.add('display-none')
-        }
-        cancelEdtBtn.onclick = () => {
-            editModal.classList.add('display-none')
-        }
+
+        editModal.classList.remove('display-none');
     }
 }
+ 
+confirmEdtBtn.onclick = () => {
+    if(currentCard) {
+        let id = Number(currentCard.dataset.id);
+
+        let titleEl = currentCard.querySelector('h4');
+        let textEl = currentCard.querySelector('p');
+
+        // UPDATE DOM
+        titleEl.innerHTML = titleEdit.value;
+        textEl.innerHTML = textEdit.value;
+
+        // UPDATE STORAGE
+        let posts = JSON.parse(localStorage.getItem('posts')) || [];
+
+        let updatedPosts = posts.map(post => {
+            if(post.id === id) {
+                return {
+                    ...post,
+                    title: titleEdit.value,
+                    body: textEdit.value
+                };
+            }
+            return post;
+        })
+        localStorage.setItem('posts', JSON.stringify(updatedPosts));
+
+        currentCard = null;
+    }
+    editModal.classList.add('display-none');
+};
+
+cancelEdtBtn.onclick = () => {
+    editModal.classList.add('display-none');
+    currentCard = null;
+};
