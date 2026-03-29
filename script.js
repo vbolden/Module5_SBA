@@ -16,7 +16,7 @@ let textEdit = document.getElementById('textEdit');
 
 // EVENT LISTENERS
 window.addEventListener('load', () => {
-    let posts = JSON.parse(sessionStorage.getItem('posts')) || [];
+    let posts = JSON.parse(localStorage.getItem('posts')) || [];
 
     posts.forEach(post => createCard(post));
 });
@@ -49,17 +49,19 @@ function addPost() {
         body: postText.value
     };
 
-    let posts = JSON.parse(sessionStorage.getItem('posts')) || [];
+    let posts = JSON.parse(localStorage.getItem('posts')) || [];
     posts.push(post);
 
-    sessionStorage.setItem('posts', JSON.stringify(posts));
+    localStorage.setItem('posts', JSON.stringify(posts));
 
     createCard(post); // render it 
 }
 
 function createCard(post) {
     let postCard = document.createElement('div');
-    postCard.classList.add("card-body")
+    postCard.classList.add("card-body");
+
+    postCard.dataset.id = post.id;
 
     let postCardTitle = document.createElement('h4');
     postCardTitle.innerHTML = post.title;
@@ -88,20 +90,36 @@ function clearInput() {
     postText.value = '';
 }
 
+let currentCard = null;
+
 function deleteEntry(e) {
     if (e.target.classList.contains('delete')) {
-        const post = e.target.closest('div')
-        deleteModal.classList.remove('display-none')
-        confirmDelBtn.addEventListener('click', () => {
-            post.remove()
-            deleteModal.classList.add('display-none')
-        })
-        cancelDelBtn.addEventListener('click', () => {
-            deleteModal.classList.add('display-none')
-        })
+        currentCard = e.target.closest('.card-body');
 
+        deleteModal.classList.remove('display-none');
     }
 }
+
+confirmDelBtn.onclick = () => {
+    if (currentCard) {
+        let id = Number(currentCard.dataset.id);
+
+        let posts = JSON.parse(localStorage.getItem('posts')) || [];
+        posts = posts.filter(post => post.id !== id);
+
+        localStorage.setItem('posts', JSON.stringify(posts));
+
+        currentCard.remove();
+        currentCard = null;
+    }
+
+    deleteModal.classList.add('display-none');
+};
+
+cancelDelBtn.onclick = () => {
+    deleteModal.classList.add('display-none');
+    currentCard = null;
+};
 
 function editEntry(e) {
     if (e.target.classList.contains('edit')) {
