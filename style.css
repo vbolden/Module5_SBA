@@ -84,10 +84,48 @@ h3 {
   object-fit: cover;
 }
 
-#delete, #edit {
+.delete, .edit {
     width: 25%;
     margin: 2px;
     padding: 2px;
     font-size: 12px;
     border: 1px solid #212529;
+}
+
+#delete-modal, #edit-modal {
+    border: 2px solid #212529;
+    background-color: whitesmoke;
+    padding: 10px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+
+}
+
+#confirm-delete,
+#confirm-edit {
+    margin-left: 15px;
+}
+
+#confirm-delete, 
+#confirm-edit, 
+#cancel-delete, 
+#cancel-edit {
+    width: 45%;
+    margin-bottom: 10px;
+}
+
+#textEdit {
+    width: 90%;
+    height: 10rem;
+}
+
+#titleEdit {
+    width: 90%;
+}
+
+.display-none {
+    display: none;
 }
