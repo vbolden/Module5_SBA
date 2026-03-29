@@ -56,17 +56,12 @@ function addItem() {
     deletePost.classList.add("delete")
     deletePost.innerHTML = "Delete Post"
 
-    postCard.appendChild(postCardTitle);
-    postCard.appendChild(postCardBody);
-    postCard.appendChild(editPost);
-    postCard.appendChild(deletePost);
+    postCard.append(postCardTitle, postCardBody, editPost, deletePost);
     blogCards.appendChild(postCard);
     console.log(postCard);
 
     deletePost.addEventListener('click', deleteEntry);
     editPost.addEventListener('click', editEntry);
-
-    // sessionStorage.setItem('postCard', postCard.innerHTML);
 }
 
 function clearInput() {
