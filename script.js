@@ -4,9 +4,19 @@ let postTitle = document.getElementById("post-title");
 let postText = document.getElementById("textbox");
 let addPostBtn = document.getElementById("addButton");
 let blogCards = document.getElementById('cards-container');
+let deleteModal = document.getElementById('delete-modal');
+let editModal = document.getElementById('edit-modal');
+let confirmDelBtn = document.getElementById('confirm-delete');
+let confirmEdtBtn = document.getElementById('confirm-edit');
+let cancelDelBtn = document.getElementById('cancel-delete');
+let cancelEdtBtn = document.getElementById('cancel-edit');
+let titleEdit = document.getElementById('titleEdit');
+let textEdit = document.getElementById('textEdit');
 
 
 // EVENT LISTENERS
+// window.addEventListener('load', displayData);
+
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     addItem();
@@ -23,6 +33,8 @@ addPostBtn.addEventListener('click', () => {
             postTitle.setCustomValidity('')
         }
     })
+
+
 })
 
 // FUCNTIONS
@@ -37,11 +49,11 @@ function addItem() {
     postCardBody.innerHTML = postText.value;
 
     let editPost = document.createElement('button');
-    editPost.id = "edit"
+    editPost.classList.add('edit');
     editPost.innerHTML = "Edit Post"
 
     let deletePost = document.createElement('button');
-    deletePost.id = "delete"
+    deletePost.classList.add("delete")
     deletePost.innerHTML = "Delete Post"
 
     postCard.appendChild(postCardTitle);
@@ -49,9 +61,53 @@ function addItem() {
     postCard.appendChild(editPost);
     postCard.appendChild(deletePost);
     blogCards.appendChild(postCard);
+    console.log(postCard);
+
+    deletePost.addEventListener('click', deleteEntry);
+    editPost.addEventListener('click', editEntry);
+
+    // sessionStorage.setItem('postCard', postCard.innerHTML);
 }
 
 function clearInput() {
     postTitle.value = '';
     postText.value = '';
+}
+
+function deleteEntry(e) {
+    if (e.target.classList.contains('delete')) {
+        const post = e.target.closest('div')
+        deleteModal.classList.remove('display-none')
+        confirmDelBtn.addEventListener('click', () => {
+            post.remove()
+            deleteModal.classList.add('display-none')
+        })
+        cancelDelBtn.addEventListener('click', () => {
+            deleteModal.classList.add('display-none')
+        })
+
+    }
+}
+
+function editEntry(e) {
+    if (e.target.classList.contains('edit')) {
+        editModal.classList.remove('display-none');
+        let card = e.target.parentElement;
+        let title = card.querySelector('h4')
+        console.log(title.innerHTML);
+        titleEdit.value = title.innerHTML;
+        let text = card.querySelector('p')
+        console.log(text.innerHTML);
+        textEdit.value = text.innerHTML;
+        confirmEdtBtn.onclick = () => {
+            console.log(title.innerHTML);
+            title.innerHTML = titleEdit.value;
+            console.log(title.innerHTML);
+            text.innerHTML = textEdit.value;
+            editModal.classList.add('display-none')
+        }
+        cancelEdtBtn.onclick = () => {
+            editModal.classList.add('display-none')
+        }
+    }
 }
