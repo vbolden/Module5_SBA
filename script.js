@@ -137,6 +137,11 @@ function editEntry(e) {
 }
  
 confirmEdtBtn.onclick = () => {
+    if(!titleEdit.value.trim() || !textEdit.value.trim()) {
+        alert("Please fill out both fields")
+        return
+    }
+
     if(currentCard) {
         let id = Number(currentCard.dataset.id);
 
