@@ -15,11 +15,15 @@ let textEdit = document.getElementById('textEdit');
 
 
 // EVENT LISTENERS
-// window.addEventListener('load', displayData);
+window.addEventListener('load', () => {
+    let posts = JSON.parse(sessionStorage.getItem('posts')) || [];
+
+    posts.forEach(post => createCard(post));
+});
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
-    addItem();
+    addPost();
     clearInput();
 });
 
@@ -45,10 +49,10 @@ function addPost() {
         body: postText.value
     };
 
-    let posts = JSON.parse(localStorage.getItem('posts') || []);
+    let posts = JSON.parse(sessionStorage.getItem('posts')) || [];
     posts.push(post);
 
-    localStorage.setItem('posts', JSON.stringify(posts));
+    sessionStorage.setItem('posts', JSON.stringify(posts));
 
     createCard(post); // render it 
 }
@@ -58,10 +62,10 @@ function createCard(post) {
     postCard.classList.add("card-body")
 
     let postCardTitle = document.createElement('h4');
-    postCardTitle.innerHTML = postTitle.value;
+    postCardTitle.innerHTML = post.title;
 
     let postCardBody = document.createElement('p');
-    postCardBody.innerHTML = postText.value;
+    postCardBody.innerHTML = post.body;
 
     let editPost = document.createElement('button');
     editPost.classList.add('edit');
