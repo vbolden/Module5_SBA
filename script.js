@@ -38,7 +38,22 @@ addPostBtn.addEventListener('click', () => {
 })
 
 // FUCNTIONS
-function addItem() {
+function addPost() {
+    let post = {
+        id: Date.now(), // creates unique ID
+        title: postTitle.value,
+        body: postText.value
+    };
+
+    let posts = JSON.parse(localStorage.getItem('posts') || []);
+    posts.push(post);
+
+    localStorage.setItem('posts', JSON.stringify(posts));
+
+    createCard(post); // render it 
+}
+
+function createCard(post) {
     let postCard = document.createElement('div');
     postCard.classList.add("card-body")
 
