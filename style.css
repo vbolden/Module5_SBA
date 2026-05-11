@@ -8,6 +8,17 @@ body {
     color: #212529;
 }
 
+.image-header {
+    height: 30vh;
+    width: 100%;
+}
+
+.image-header img {
+    object-fit: cover;
+    height: 200px;
+    width: 100%;
+}
+
 .container {
     display: flex;
 }
@@ -77,11 +88,11 @@ h3 {
     text-align: center;
 }
 
-.aside img {
+/* .aside img {
     width: 100%;
     height: 15%;
     object-fit: cover;
-}
+} */
 
 .delete,
 .edit {
